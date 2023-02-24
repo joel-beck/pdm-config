@@ -17,7 +17,8 @@ def config_path(root_path: Path) -> Path:
 
 @pytest.fixture
 def config(config_path: Path) -> Config:
-    return read_config(config_path)
+    # Mock environment variables for testing
+    return read_config(config_path, mock=True)
 
 
 @pytest.fixture

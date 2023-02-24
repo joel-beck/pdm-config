@@ -26,8 +26,12 @@ def read_model_config(config_path: Path) -> ModelConfig:
     return dacite.from_dict(data_class=ModelConfig, data=config_dict["model"])
 
 
-def read_environment_config() -> EnvironmentConfig:
+def read_environment_config(mock: bool = False) -> EnvironmentConfig:
     """Read environment variables from .env file"""
+
+    if mock:
+        return EnvironmentConfig(SSH_KEY="Example Key", DB_CONNECTION="Example Connection")
+
     load_dotenv()
 
     ssh_key = os.getenv("SSH_KEY")
@@ -42,9 +46,9 @@ def read_environment_config() -> EnvironmentConfig:
     return EnvironmentConfig(SSH_KEY=ssh_key, DB_CONNECTION=db_connection)
 
 
-def read_config(config_path: Path) -> Config:
+def read_config(config_path: Path, mock: bool = False) -> Config:
     """Merge config from config.toml and environment variables from .env file"""
     model_config = read_model_config(config_path)
-    environment_config = read_environment_config()
+    environment_config = read_environment_config(mock)
 
     return Config(model=model_config, environment=environment_config)
