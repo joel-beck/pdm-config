@@ -1,0 +1,75 @@
+[build-system]
+requires = ["pdm-pep517>=1.0"]
+build-backend = "pdm.pep517.api"
+
+[project]
+name = "pdm-config"
+version = "0.1.0"
+description = "Configuration Template with pdm and toml"
+authors = [{ name = "Joel Beck", email = "joel.beck@stud.uni-goettingen.de" }]
+dependencies = ["python-dotenv>=0.21.1", "dacite>=1.8.0"]
+requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+
+[project.urls]
+Repository = "https://github.com/joel-beck/pdm-config"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "ruff>=0.0.252",
+    "black>=23.1.0",
+    "pytest>=7.2.1",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.0.1",
+    "ipykernel>=6.21.2",
+    "notebook>=6.5.2",
+]
+
+[tool.pdm.scripts]
+format = "black ."
+lint = "ruff --fix --exit-non-zero-on-fix --show-fixes ."
+test = "pytest"
+check = "mypy ."
+all = "pre-commit run --all-files"
+main = { shell = "cd pdm_config && python -m pdm_config" }
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+include = '\.pyi?$'
+
+[tool.mypy]
+mypy_path = "pdm_config"
+allow_redefinition = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.ruff]
+# see explanation of letter codes at https://beta.ruff.rs/docs/rules/
+select = ["ANN", "E", "F", "I", "N", "UP", "W"]
+line-length = 100
+# - `ANN101` (missing type annotation for `self` in method)
+# - `N803` (argument name should be lowercase)
+# - `N806` (variable in function should be lowercase)
+ignore = ["ANN101", "N803", "N806"]
+# Never try to fix `F401` (unused imports).
+unfixable = ["F401"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# command line options for pytest
+addopts = "--verbose"
+filterwarnings = ["ignore::DeprecationWarning", "ignore::UserWarning"]
