@@ -13,7 +13,7 @@ Its main purpose is reading information from cofiguration files in a structured,
 As the repository name suggests, this project uses [pdm](https://github.com/pdm-project/pdm) as package manager. `pdm` handles not only the installation of dependencies, but also the creation of virtual environments, execution of custom scripts similar to `npm`, and further serves as a build backend.
 Thus, it works as a modern alternative to [poetry](https://github.com/python-poetry/poetry) and replaces the traditional package building process based on [setuptools](https://github.com/python-poetry/poetry).
 
-Further, `pdm` stores all package metadata in `pyproject.toml` according to [PEP 621](https://peps.python.org/pep-0621/). There is no need for `setup.py` or `setup.cfg` files!
+Further, `pdm` stores all package metadata in `pyproject.toml` according to [PEP 621](https://peps.python.org/pep-0621/). There is no need for `setup.py`, `setup.cfg` or `requirements.txt` files!
 
 
 ### Development Tools
@@ -39,6 +39,19 @@ Further, it makes heavy use of Python [dataclasses](https://docs.python.org/3/li
 
 ## Installation
 
+The easiest way to use the `pdm_config` package is to clone the repository from GitHub and run
+
+```
+pip install .
+```
+
+If you want to contribute to development or extend the project according to your own needs, run the command
+
+```
+pip install -e .
+```
+
+to install the package in *editable mode* with all development dependencies.
 
 
 ## Usage

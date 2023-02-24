@@ -5,7 +5,7 @@ build-backend = "pdm.pep517.api"
 [project]
 name = "pdm-config"
 version = "0.1.0"
-description = "Configuration Template with pdm and toml"
+description = "Minimal modern Python package setup with pdm"
 authors = [{ name = "Joel Beck", email = "joel.beck@stud.uni-goettingen.de" }]
 dependencies = ["python-dotenv>=0.21.1", "dacite>=1.8.0"]
 requires-python = ">=3.11"
